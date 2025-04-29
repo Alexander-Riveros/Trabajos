@@ -2,6 +2,8 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 
 # --- Configuración de la Página ---
 st.set_page_config(page_title="Maqueta Virtual - Dinámica de Usuarios 🚀", page_icon="🚀", layout="wide")
@@ -145,24 +147,22 @@ with col3:
 st.markdown('</div>', unsafe_allow_html=True)
 
 # --- 5. Gráficas Dinámicas ---
-st.markdown('<div class="block">', unsafe_allow_html=True)
-st.subheader('📈 Evolución del Sistema en el Tiempo')
-
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(t, U, label='Usuarios Activos', color='royalblue', linewidth=2)
-ax.plot(t, procesados, label='Usuarios Procesados', color='limegreen', linestyle='--', linewidth=2)
-ax.plot(t, abandonados, label='Usuarios que Abandonan', color='red', linestyle='-.', linewidth=2)
+ax.plot(t, procesados, label='Usuarios Procesados', color='seagreen', linestyle='--', linewidth=2)
+ax.plot(t, abandonados, label='Usuarios que Abandonan', color='firebrick', linestyle='-.', linewidth=2)
 
 ax.set_xlabel('Tiempo (segundos)', fontsize=12)
 ax.set_ylabel('Cantidad de Usuarios', fontsize=12)
-ax.set_title('Dinámica de Usuarios', fontsize=16, color='#2E86C1')
-ax.legend(fontsize=12)
+ax.set_title('Dinámica de Usuarios en el Sistema Web', fontsize=14, color='#154360')
+ax.legend(loc='upper right')
 ax.grid(True)
-ax.set_facecolor('#FBFCFC')
+fig.tight_layout()
 
+# Contenedor gráfico estilizado
+st.markdown('<div class="chart-container">', unsafe_allow_html=True)
 st.pyplot(fig)
 st.markdown('</div>', unsafe_allow_html=True)
-
 # --- 6. Información Pedagógica Final ---
 with st.expander("🧠 ¿Cómo funciona este Modelo?"):
     st.write("""
